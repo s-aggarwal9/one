@@ -23,7 +23,7 @@ const Header = () => {
           </Link>
           <ClerkLoaded>
             <SignedIn>
-              <Link href="myOrders">
+              <Link href="myorders">
                 <Package />
                 <span>orders</span>
               </Link>
