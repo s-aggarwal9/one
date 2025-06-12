@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { ShoppingCart } from "lucide-react";
-import { title } from "process";
 
 const productType = defineType({
   name: "productType",

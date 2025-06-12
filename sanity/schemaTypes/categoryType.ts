@@ -1,5 +1,4 @@
 import { Tag } from "lucide-react";
-import { title } from "process";
 import { defineField, defineType } from "sanity";
 
 const categoryType = defineType({
