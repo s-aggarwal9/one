@@ -1,4 +1,5 @@
 import { ProductType } from "@/sanity.types";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -10,7 +11,13 @@ const ProductThumb = ({ product }: { product: ProductType }) => {
       className={`${isOutOfStock ? "opacity-50" : ""}`}
     >
       <div>
-        {true && (
+        {product.image && (
+          <Image
+            src={ImageUrl(product.image).url()}
+            alt={product.name || "Product image"}
+          />
+        )}
+        {isOutOfStock && (
           <div>
             <span>Out of Stock</span>
           </div>
