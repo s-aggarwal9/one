@@ -1,3 +1,4 @@
+import { imageUrl } from "@/lib/imageUrl";
 import { ProductType } from "@/sanity.types";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +14,7 @@ const ProductThumb = ({ product }: { product: ProductType }) => {
       <div>
         {product.image && (
           <Image
-            src={ImageUrl(product.image).url()}
+            src={imageUrl(product.image).url()}
             alt={product.name || "Product image"}
           />
         )}
