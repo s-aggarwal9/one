@@ -1,4 +1,4 @@
-import ProductGrid from "@/components/ProductGrid";
+import { ProductGrid } from "@/components/ProductGrid";
 import { searchProductsByName } from "@/sanity/lib/products/searchProductByName";
 import React from "react";
 
@@ -21,7 +21,7 @@ const page = async ({ searchParams }: { searchParams: { query: string } }) => {
     <div>
       <div>
         <h1>Search results for {query}</h1>
-        {/* <ProductGrid products={products} /> */}
+        <ProductGrid products={products} />
         <h1>RR</h1>
       </div>
     </div>

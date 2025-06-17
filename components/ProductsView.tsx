@@ -1,5 +1,6 @@
 import { Category, ProductType } from "@/sanity.types";
 import React from "react";
+import { ProductGrid } from "./ProductGrid";
 
 interface ProductsViewProps {
   products: ProductType[];
@@ -10,9 +11,11 @@ const ProductsView = ({ products, categories }: ProductsViewProps) => {
   return (
     <div>
       <div>{/* <CategorySelectorComponent categories={categories}/> */}</div>
-      <div>{/* <ProductGrid products={products} /> */}</div>
+      <div>
+        <ProductGrid products={products} />
+      </div>
     </div>
   );
 };
 
-export default ProductsView;
+export { ProductsView };

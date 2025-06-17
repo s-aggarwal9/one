@@ -16,6 +16,8 @@ const ProductThumb = ({ product }: { product: ProductType }) => {
           <Image
             src={imageUrl(product.image).url()}
             alt={product.name || "Product image"}
+            width={20}
+            height={20}
           />
         )}
         {isOutOfStock && (
@@ -28,4 +30,4 @@ const ProductThumb = ({ product }: { product: ProductType }) => {
   );
 };
 
-export default ProductThumb;
+export { ProductThumb };
