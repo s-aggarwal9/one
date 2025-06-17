@@ -19,7 +19,7 @@ async function BlackFridayBanner() {
               <span>
                 Use code: <span>{sale.couponCode}</span>
               </span>
-              <span> for {sale.discountAmount}%OFF</span>
+              <span> for {sale.discountAmount} %OFF</span>
             </div>
           </div>
         </div>
