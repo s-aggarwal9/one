@@ -26,6 +26,11 @@ const ProductThumb = ({ product }: { product: ProductType }) => {
           </div>
         )}
       </div>
+      <div>
+        <h2>{product.name}</h2>
+        <p>{product.description ? product.description : "no desc available"}</p>
+        <p>Rs. {product.price?.toFixed(2)}</p>
+      </div>
     </Link>
   );
 };
