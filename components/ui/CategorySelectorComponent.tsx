@@ -33,7 +33,52 @@ const CategorySelectorComponent = ({ categories }: CategorySelectorProps) => {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0"></PopoverContent>
+      <PopoverContent className="w-full p-0">
+        <Command>
+          <CommandInput
+            placeholder="Search Category..."
+            className="h-9"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const selectedCategory = categories.find((c) => {
+                  c.title
+                    ?.toLocaleLowerCase()
+                    .includes(e.currentTarget.value.toLowerCase());
+                  if (selectedCategory?.slug?.current) {
+                    setValue(selectedCategory._id);
+                    router.push(`/categories/${selectedCategory.slug.current}`);
+                    setIsOpen(false);
+                  }
+                });
+              }
+            }}
+          />
+          <CommandList>
+            <CommandEmpty>No category found</CommandEmpty>
+            <CommandGroup>
+              {categories.map((category) => (
+                <CommandItem
+                  key={category._id}
+                  value={category.title}
+                  onSelect={() => {
+                    setValue(value === category._id ? "" : category._id);
+                    router.push(`/categories/${category.slug?.current}`);
+                    setIsOpen(false);
+                  }}
+                >
+                  {category.title}
+                  <Check
+                    className={cn(
+                      "ml-auto h-4 w-4",
+                      value === category._id ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
     </Popover>
   );
 };
