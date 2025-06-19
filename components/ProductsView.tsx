@@ -10,7 +10,9 @@ interface ProductsViewProps {
 const ProductsView = ({ products, categories }: ProductsViewProps) => {
   return (
     <div>
-      <div>{/* <CategorySelectorComponent categories={categories}/> */}</div>
+      <div>
+        <CategorySelectorComponent categories={categories} />
+      </div>
       <div>
         <ProductGrid products={products} />
       </div>
