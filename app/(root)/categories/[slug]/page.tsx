@@ -1,3 +1,4 @@
+import getProductsByCategory from "@/sanity/lib/products/getProductByCategories";
 import React from "react";
 
 const CategoriesPage = async ({
