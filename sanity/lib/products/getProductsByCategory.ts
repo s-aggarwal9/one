@@ -14,7 +14,7 @@ const getProductsByCategory = async (categorySlug: string) => {
     return products.data || [];
   } catch (error) {
     console.error("error fetching product by id:", error);
-    return null;
+    return [];
   }
 };
 
