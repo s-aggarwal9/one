@@ -70,3 +70,5 @@ const useBasketStore = create<BasketState>()(
     { name: "basket-store" }
   )
 );
+
+export default useBasketStore;
