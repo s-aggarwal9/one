@@ -32,7 +32,7 @@ const Header = () => {
           <input type="text" name="query" placeholder="Search" />
         </Form>
         <div>
-          <Link href="/myBasket">
+          <Link href="/basket">
             <ShoppingCart className="w-6 h-6" />
             <span>{itemCount}</span>
 
