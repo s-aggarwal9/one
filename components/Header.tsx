@@ -7,9 +7,13 @@ import Form from "next/form";
 import { ShoppingCart, Package } from "lucide-react";
 import { SignedIn } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import useBasketStore from "@/app/(root)/store";
 
 const Header = () => {
   const { user } = useUser();
+  const itemCount = useBasketStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   const createPasskey = async () => {
     try {
@@ -29,7 +33,9 @@ const Header = () => {
         </Form>
         <div>
           <Link href="/myBasket">
-            <ShoppingCart />
+            <ShoppingCart className="w-6 h-6" />
+            <span>{itemCount}</span>
+
             <span>My Basket</span>
           </Link>
           <ClerkLoaded>
