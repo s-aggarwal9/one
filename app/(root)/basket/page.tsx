@@ -8,13 +8,7 @@ import Image from "next/image";
 import { imageUrl } from "@/lib/imageUrl";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
-
-export type Metadata = {
-  orderNumber: string;
-  customerName: string;
-  customerEmail: string;
-  clerkUserId: string;
-};
+import { Metadata } from "@/actions/createCheckoutSession";
 
 const BasketPage = () => {
   const groupedItems = useBasketStore((state) => state.getGroupedItems());
