@@ -4,7 +4,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
 
-const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const productPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
@@ -36,9 +40,12 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <div>{product.price?.toFixed(2)}</div>
           {product.description && <p>{product.description}</p>}
         </div>
+        <div className="mt-6">
+          <AddToBasketButton product={product} disabled={isOutOfStock} />
+        </div>
       </div>
     </div>
   );
 };
 
-export default page;
+export default productPage;
