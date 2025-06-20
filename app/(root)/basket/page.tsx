@@ -37,7 +37,11 @@ const BasketPage = () => {
         customerEmail: user?.emailAddresses[0].emailAddress ?? "email",
         clerkUserId: user!.id,
       };
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
