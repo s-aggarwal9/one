@@ -13,3 +13,14 @@ export type GroupedBasketItem = {
   product: BasketItem["product"];
   quantity: number;
 };
+
+export async function createCheckoutSession(
+  items: GroupedBasketItem[],
+  metedat: Metadata
+) {
+  try {
+  } catch (error) {
+    console.error("Error creating checkout session: ", error);
+    throw error;
+  }
+}
