@@ -1,6 +1,7 @@
 "use server";
 
 import { BasketItem } from "@/app/(root)/store";
+import stripe from "@/lib/stripe";
 
 export type Metadata = {
   orderNumber: string;
@@ -16,7 +17,7 @@ export type GroupedBasketItem = {
 
 export async function createCheckoutSession(
   items: GroupedBasketItem[],
-  metedat: Metadata
+  metedata: Metadata
 ) {
   try {
     // check if product without price
@@ -24,6 +25,12 @@ export async function createCheckoutSession(
     if (itemsWithoutPrice.length > 0) {
       throw new Error("Some items do not have a price");
     }
+
+    // search for existing customer by email
+    const customers = await stripe.customers.list({
+      email: metedata.customerEmail,
+      limit: 1,
+    });
   } catch (error) {
     console.error("Error creating checkout session: ", error);
     throw error;
