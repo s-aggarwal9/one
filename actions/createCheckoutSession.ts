@@ -31,6 +31,12 @@ export async function createCheckoutSession(
       email: metedata.customerEmail,
       limit: 1,
     });
+
+    let customerId: string | undefined;
+
+    if (customers.data.length > 0) {
+      customerId = customers.data[0].id;
+    }
   } catch (error) {
     console.error("Error creating checkout session: ", error);
     throw error;
