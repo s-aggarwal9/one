@@ -8,7 +8,10 @@ import Image from "next/image";
 import { imageUrl } from "@/lib/imageUrl";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
-import { Metadata } from "@/actions/createCheckoutSession";
+import {
+  createCheckoutSession,
+  Metadata,
+} from "@/actions/createCheckoutSession";
 
 const BasketPage = () => {
   const groupedItems = useBasketStore((state) => state.getGroupedItems());
@@ -31,6 +34,11 @@ const BasketPage = () => {
         customerEmail: user?.emailAddresses[0].emailAddress ?? "email",
         clerkUserId: user!.id,
       };
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
     } catch (error) {
       console.error("Error creating checkout session:", error);
     } finally {
