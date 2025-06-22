@@ -1,6 +1,7 @@
 "use server";
 
 import { BasketItem } from "@/app/(root)/store";
+import { imageUrl } from "@/lib/imageUrl";
 import stripe from "@/lib/stripe";
 
 export type Metadata = {
@@ -47,7 +48,25 @@ export async function createCheckoutSession(
       allow_promotion_codes: true,
       success_url: "",
       cancel_url: "",
+      line_items: items.map((item) => ({
+        price_data: {
+          currency: "gbp",
+          unit_amount: Math.round(item.product.price! * 100),
+          product_data: {
+            name: item.product.name || "Unnamed Product",
+            description: `Product ID: ${item.product._id}`,
+            metadata: {
+              id: item.product._id,
+            },
+            images: item.product.image
+              ? [imageUrl(item.product.image).url()]
+              : undefined,
+          },
+        },
+        quantity: item.quantity,
+      })),
     });
+    return session.url;
   } catch (error) {
     console.error("Error creating checkout session: ", error);
     throw error;
