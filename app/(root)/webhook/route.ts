@@ -81,4 +81,24 @@ const createOrderInSanity = async (session: Stripe.Checkout.Session) => {
     },
     quantity: item.quantity || 0,
   }));
+
+  const order = await backendClient.create({
+    _type: "order",
+    orderNumber,
+    stripeCheckoutSessionId: id,
+    stripePaymentIntentId: payment_intent,
+    customerName,
+    stripeCustomerId: customer,
+    clerkUserId: clerkUserId,
+    email: customerEmail,
+    currency,
+    amountDiscount: total_details?.amount_discount
+      ? total_details.amount_discount / 100
+      : 0,
+    products: sanityProducts,
+    totalPrice: amount_total ? amount_total : 0,
+    orderDate: new Date().toString(),
+  });
+
+  return order;
 };
