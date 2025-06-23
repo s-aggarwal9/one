@@ -1,3 +1,4 @@
+import { Metadata } from "@/actions/createCheckoutSession";
 import stripe from "@/lib/stripe";
 import { backendClient } from "@/sanity/lib/backendClient";
 import { headers } from "next/headers";
@@ -51,3 +52,17 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ received: true });
 }
+const createOrderInSanity = async (session: Stripe.Checkout.Session) => {
+  const {
+    id,
+    amount_total,
+    currency,
+    metadata,
+    payment_intent,
+    customer,
+    total_details,
+  } = session;
+
+  const { orderNumber, customerEmail, customerName, clerkUserId } =
+    metadata as Metadata;
+};
