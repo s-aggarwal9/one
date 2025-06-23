@@ -65,4 +65,20 @@ const createOrderInSanity = async (session: Stripe.Checkout.Session) => {
 
   const { orderNumber, customerEmail, customerName, clerkUserId } =
     metadata as Metadata;
+
+  const lineItemsWithProduct = await stripe.checkout.sessions.listLineItems(
+    id,
+    {
+      expand: ["data.price.product"],
+    }
+  );
+
+  const sanityProducts = lineItemsWithProduct.data.map((item) => ({
+    _key: crypto.randomUUID(),
+    product: {
+      _type: "referencr",
+      _ref: (item.price?.product as Stripe.Product)?.metadata?.id,
+    },
+    quantity: item.quantity || 0,
+  }));
 };
