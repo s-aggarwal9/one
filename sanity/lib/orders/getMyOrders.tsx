@@ -1,4 +1,5 @@
 import { defineQuery } from "next-sanity";
+import { sanityFetch } from "../live";
 
 export const getMyOrders = async (userId: string) => {
   if (!userId) {
@@ -14,7 +15,11 @@ export const getMyOrders = async (userId: string) => {
         product->}}`);
 
   try {
-    const orders = [];
+    const orders = await sanityFetch({
+      query: MY_ORDERS_QUERY,
+      params: { userId },
+    });
+    return orders.data || [];
   } catch (error) {
     console.error("Error fetching orders:", error);
     throw new Error("Error fetching orders");
