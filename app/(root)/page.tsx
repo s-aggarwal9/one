@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { ProductsView } from "@/components/ProductsView";
