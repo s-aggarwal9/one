@@ -6,9 +6,20 @@ import React from "react";
 import Form from "next/form";
 import { ShoppingCart, Package } from "lucide-react";
 import { SignedIn } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const { user } = useUser();
+
+  const createPasskey = async () => {
+    try {
+      const response = user?.createPasskey();
+      console.log(response);
+    } catch (error) {
+      console.log("Error:", JSON.stringify(error));
+    }
+  };
+
   return (
     <header>
       <div>
@@ -39,6 +50,9 @@ const Header = () => {
               </div>
             ) : (
               <SignInButton mode="modal" />
+            )}
+            {user?.passkeys.length === 0 && (
+              <Button onClick={createPasskey}>Create Passkey</Button>
             )}
           </ClerkLoaded>
         </div>
